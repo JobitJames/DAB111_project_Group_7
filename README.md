@@ -33,10 +33,13 @@ The dataset contains climate station information, including:
    cd Project_Python
 
 
-Install the required packages:
-pip install -r requirements.txt
+2. Install the required packages:
+pip install 
+```bash
+-r requirements.txt
 
-Run the Flask app:
+3. Run the Flask app:
+```bash
 python app.py
 
 
