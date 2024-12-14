@@ -34,16 +34,17 @@ The dataset contains climate station information, including:
 
 
 2. Install the required packages:
-pip install 
-```bash
--r requirements.txt
+    pip install 
+    ```bash
+    -r requirements.txt
 
 3. Run the Flask app:
-```bash
-python app.py
+    ```bash
+      python app.py
 
 
-Open the web application in your browser at http://127.0.0.1:5000/.
+Open the web application in your browser at 
+http://127.0.0.1:5000/.
 
 
 Requirements
