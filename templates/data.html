@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='data.css') }}">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('{{ url_for("static", filename="images/data_page.jpg") }}');
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 20px;
+            margin: 20px auto;
+            width: 80%;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #000000;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        nav a:hover {
+            color: #00448A;
+        }
+
+        header {
+            text-align: center;
+            font-size: 2rem;
+            color: #ffffff;
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .container {
+            width: 90%;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .controls {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .controls select, .controls button {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .controls button {
+            background-color: #1e90ff;
+            color: white;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .controls button:hover {
+            background-color: #104e8b;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table th, table td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        table th {
+            background: #00448A;
+            color: rgb(255, 255, 255);
+            cursor: pointer;
+        }
+
+        table th:hover {
+            background: #001d39;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        table tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/about">About Data</a>
+        <a href="/data">Data</a>
+        <a href="/team">Team</a>
+    </nav>
+
+    <header>Climate Stations Data</header>
+
+    <div class="container">
+        <div class="controls">
+            <label for="search-dropdown">Search by State Code:</label>
+            <select id="search-dropdown" onchange="filterByState()">
+                <option value="">All</option>
+                <option value="MB">MB (Manitoba)</option>
+                <option value="QC">QC (Quebec)</option>
+                <option value="BC">BC (British Columbia)</option>
+                <option value="YT">YT (Yukon)</option>
+                <option value="NL">NL (Newfoundland and Labrador)</option>
+                <option value="SK">SK (Saskatchewan)</option>
+                <option value="AB">AB (Alberta)</option>
+                <option value="ON">ON (Ontario)</option>
+                <option value="NS">NS (Nova Scotia)</option>
+                <option value="NB">NB (New Brunswick)</option>
+            </select>
+            <button onclick="resetTable()">Refresh</button>
+        </div>
+
+        <table id="data-table">
+            <thead>
+                <tr>
+                    <th onclick="sortTable(0, 'num')">x</th>
+                    <th onclick="sortTable(1, 'num')">y</th>
+                    <th onclick="sortTable(2, 'num')">STN_ID</th>
+                    <th onclick="sortTable(3, 'text')">STATION_NAME</th>
+                    <th onclick="sortTable(4, 'text')">PROV_STATE_TERR_CODE</th>
+                    <th onclick="sortTable(5, 'num')">ELEVATION</th>
+                    <th onclick="sortTable(6, 'num')">first_year</th>
+                    <th onclick="sortTable(7, 'num')">last_year</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in data %}
+                <tr>
+                    <td>{{ row['x'] }}</td>
+                    <td>{{ row['y'] }}</td>
+                    <td>{{ row['STN_ID'] }}</td>
+                    <td>{{ row['STATION_NAME'] }}</td>
+                    <td>{{ row['PROV_STATE_TERR_CODE'] }}</td>
+                    <td>{{ row['ELEVATION'] }}</td>
+                    <td>{{ row['first_year'] }}</td>
+                    <td>{{ row['last_year'] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function sortTable(columnIndex, type) {
+            const table = document.getElementById('data-table');
+            const rows = Array.from(table.rows).slice(1);
+            const sortedRows = rows.sort((a, b) => {
+                const cellA = a.cells[columnIndex].innerText;
+                const cellB = b.cells[columnIndex].innerText;
+
+                if (type === 'num') {
+                    return parseFloat(cellB) - parseFloat(cellA);
+                } else {
+                    return cellA.localeCompare(cellB);
+                }
+            });
+
+            const tbody = table.tBodies[0];
+            tbody.innerHTML = '';
+            sortedRows.forEach(row => tbody.appendChild(row));
+        }
+
+        function filterByState() {
+            const dropdown = document.getElementById('search-dropdown');
+            const selectedState = dropdown.value;
+            const table = document.getElementById('data-table');
+            const rows = table.getElementsByTagName('tr');
+
+            for (let i = 1; i < rows.length; i++) {
+                const stateCell = rows[i].getElementsByTagName('td')[4];
+                if (stateCell) {
+                    const stateText = stateCell.textContent || stateCell.innerText;
+                    rows[i].style.display = selectedState === '' || stateText === selectedState ? '' : 'none';
+                }
+            }
+        }
+
+        function resetTable() {
+            const table = document.getElementById('data-table');
+            const rows = table.getElementsByTagName('tr');
+
+            for (let i = 1; i < rows.length; i++) {
+                rows[i].style.display = '';
+            }
+
+            document.getElementById('search-dropdown').value = '';
+        }
+    </script>
+</body>
+</html>

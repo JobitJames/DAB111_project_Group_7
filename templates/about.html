@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About the Dataset</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='about.css') }}">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('{{ url_for("static", filename="images/abt_bg.jpg") }}');
+            background-size: cover;
+            background-attachment: fixed;
+            color: #333;
+        }
+
+        header {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 12px;
+            padding: 10px 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        header nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            margin: 0;
+            padding: 0;
+        }
+
+        header nav ul li {
+            font-size: 1rem;
+        }
+
+        header nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+
+        header nav ul li a:hover {
+            color: #007BFF;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            padding: 75px 50px 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-title {
+            grid-column: span 2;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 20px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            border: 2px solid #000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .tile {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            border: 2px solid #000;
+            transition: transform 0.3s, border-color 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .tile:hover {
+            transform: scale(1.05);
+            border-color: #00bfff;
+        }
+
+        .tile h2 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .tile p {
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .large-box {
+            grid-column: span 2;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border: 2px solid #000;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .large-box div {
+            padding: 15px;
+            border-radius: 8px;
+            transition: transform 0.3s, border-color 0.3s;
+            border: 2px solid #000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .large-box div:hover {
+            transform: scale(1.05);
+            border-color: #007BFF;
+        }
+
+        .large-box h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        .large-box p {
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .purpose {
+            grid-column: span 2;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About Data</a></li>
+                <li><a href="/data">Data</a></li>
+                <li><a href="#">Team</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="header-title">
+            Data Set Name: Canada Climate Dataset
+        </div>
+
+        <div class="tile">
+            <h2>Dataset Overview</h2>
+            <p>Total Rows: 61<br>Total Columns: 8</p>
+        </div>
+
+        <div class="tile">
+            <h2>Column Details</h2>
+            <p><strong>Numerical:</strong> x, y, STN_ID, ELEVATION, first_year, last_year<br>
+               <strong>Categorical:</strong> STATION_NAME, PROV_STATE_TERR_CODE</p>
+        </div>
+
+        <div class="tile">
+            <h2>Numerical Columns</h2>
+            <p>x, y, STN_ID, ELEVATION, first_year, last_year<br>
+               These columns contain quantitative values essential for spatial, temporal, and statistical analyses.</p>
+        </div>
+
+        <div class="tile">
+            <h2>Categorical Columns</h2>
+            <p>STATION_NAME, PROV_STATE_TERR_CODE<br>
+               These columns describe qualitative aspects of the data, such as station names and locations.</p>
+        </div>
+
+        <div class="large-box">
+            <div>
+                <h3>x</h3>
+                <p>Represents the longitude of the station. It helps identify the station's horizontal position on the Earth's surface.</p>
+            </div>
+            <div>
+                <h3>y</h3>
+                <p>Refers to the latitude of the station, indicating its vertical position on the globe.</p>
+            </div>
+            <div>
+                <h3>STN_ID</h3>
+                <p>A unique numeric identifier for each weather station. It ensures that each station can be distinctly referenced in the database.</p>
+            </div>
+            <div>
+                <h3>ELEVATION</h3>
+                <p>Indicates the height of the station above sea level, measured in meters. Elevation is vital in understanding how altitude influences climate observations.</p>
+            </div>
+            <div>
+                <h3>first_year</h3>
+                <p>Marks the year when the station began recording climate data, providing the start of its historical records.</p>
+            </div>
+            <div>
+                <h3>last_year</h3>
+                <p>Denotes the most recent year of data collection, indicating how current the data from the station is.</p>
+            </div>
+            <div>
+                <h3>STATION_NAME</h3>
+                <p>Specifies the name of the station, often based on its geographic location or local identifier.</p>
+            </div>
+            <div>
+                <h3>PROV_STATE_TERR_CODE</h3>
+                <p>Represents the code for the province, state, or territory where the station is situated, helping in categorizing and sorting the stations regionally.</p>
+            </div>
+        </div>
+
+        <div class="tile purpose">
+            <h2>Purpose</h2>
+            <p>The dataset is essential for analyzing climate patterns across Canada, integrating geography, time, and regional factors.</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='team.css') }}">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('{{ url_for("static", filename="images/teampage.jpg") }}');
+            background-size: cover;
+            background-attachment: fixed;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7); /* Black fade covering the whole page */
+            z-index: -1;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 5px;
+            margin: 20px auto;
+            width: 40%;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #000000;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        nav a:hover {
+            color: #003c78;
+        }
+
+        header {
+            text-align: center;
+            font-size: 2.5rem;
+            color: white;
+            margin: 20px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        .team-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .team-member {
+            width: 200px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            transition: transform 0.3s ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+        }
+
+        .team-member img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .team-member .name {
+            padding: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .team-member .details {
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px;
+            font-size: 0.9rem;
+            text-align: center;
+            transition: bottom 0.3s ease;
+        }
+
+        .team-member:hover .details {
+            bottom: 0;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            color: white;
+            font-size: 0.9rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/about">About Data</a>
+        <a href="/data">Data</a>
+        <a href="/team">Team</a>
+    </nav>
+
+    <header>Meet Our Team</header>
+
+    <div class="team-container">
+        <div class="team-member">
+            <img src="{{ url_for('static', filename='images/gowri.jpg') }}" alt="Team Member 1">
+            <div class="name">Gowri S Nair</div>
+            <div class="details">Data Analytics For Business</div>
+        </div>
+        <div class="team-member">
+            <img src="{{ url_for('static', filename='images/jj.jpg') }}" alt="Team Member 2">
+            <div class="name">Jobit James</div>
+            <div class="details">Data Analytics For Business</div>
+        </div>
+        <div class="team-member">
+            <img src="{{ url_for('static', filename='images/rishav.jpg') }}" alt="Team Member 3">
+            <div class="name">Rishav Joshi</div>
+            <div class="details">Data Analytics For Business</div>
+        </div>
+        <div class="team-member">
+            <img src="{{ url_for('static', filename='images/jacob.png') }}" alt="Team Member 4">
+            <div class="name">Abanoub Medhat Samy Shokralla</div>
+            <div class="details">Data Analytics For Business</div>
+        </div>
+        <div class="team-member">
+            <img src="{{ url_for('static', filename='images/riya.png') }}" alt="Team Member 5">
+            <div class="name">Riyakumari Patel</div>
+            <div class="details">Data Analytics For Business</div>
+        </div>
+    </div>
+
+    <footer>&copy; DAB 111 - Intro to Python Programming - PROJECT - GROUP 7</footer>
+</body>
+</html>
