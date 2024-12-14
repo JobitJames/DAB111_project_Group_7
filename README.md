@@ -48,9 +48,9 @@ http://127.0.0.1:5000/.
 
 
 Requirements
-Python 3.7+
-Flask
-SQLite
-Pandas
+- Python 3.7+
+- Flask
+- SQLite
+- Pandas
 
 
