@@ -2,15 +2,10 @@
 
 Project_Python/
 |-- app.py                # Flask application
-
 |-- database_connection.ipynb  # Notebook for database operations
-
 |-- Canada_climatedataset.db   # SQLite database
-
 |-- selected_stations.csv      # Dataset used for the project
-
 |-- static/                # Static assets (CSS, JS, images)
-
 |-- templates/             # HTML templates
 
 
